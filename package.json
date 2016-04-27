@@ -1,6 +1,6 @@
 {
   "name": "raw-shaking-react-form-field",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "raw field class for shaking-react-form.",
   "main": "dist/field.js",
   "scripts": {
