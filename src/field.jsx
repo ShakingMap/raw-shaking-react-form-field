@@ -9,6 +9,8 @@ import React from 'react';
  * - {Func(value)} onChange
  * - {String} validationState - 'success' or 'error'
  * - {String} validationError
+ * - {Boolean} readOnly
+ * - {Boolean} disabled
  */
 
 const fieldClass = 'field';
@@ -22,7 +24,7 @@ class InputField extends React.Component {
     }
 
     render() {
-        const {label, type, options, onChange, value, validationState, validationError} = this.props;
+        const {label, type, options, onChange, value, validationState, validationError, readOnly, disabled} = this.props;
         const {placeholder} = options || {};
 
         const validationClass = validationState ? `validation-${validationState}` : '';
@@ -38,6 +40,8 @@ class InputField extends React.Component {
                 placeholder={placeholder}
                 value={value || ''}
                 onChange={(e)=>onChange(e.target.value)}
+                readOnly={readOnly}
+                disabled={disabled}
             />
             {
                 shouldShowError ? <div className="error">{validationError}</div> : null
@@ -55,7 +59,7 @@ class TextareaField extends React.Component {
     }
 
     render() {
-        const {label, options, onChange, value, validationState, validationError} = this.props;
+        const {label, options, onChange, value, validationState, validationError, readOnly, disabled} = this.props;
         const {placeholder, rows} = options || {};
 
         const validationClass = validationState ? `validation-${validationState}` : '';
@@ -71,6 +75,8 @@ class TextareaField extends React.Component {
                 rows={rows}
                 value={value || ''}
                 onChange={(e)=>onChange(e.target.value)}
+                readOnly={readOnly}
+                disabled={disabled}
             />
             {
                 shouldShowError ? <div className="error">{validationError}</div> : null
@@ -90,7 +96,7 @@ class CheckboxGroupField extends React.Component {
     }
 
     render() {
-        const {label, options, onChange, value, validationState, validationError} = this.props;
+        const {label, options, onChange, value, validationState, validationError, readOnly, disabled} = this.props;
         const {group, vertical} = options || {};
 
         const validationClass = validationState ? `validation-${validationState}` : '';
@@ -118,6 +124,8 @@ class CheckboxGroupField extends React.Component {
                                 if (e.target.checked) newValue.push(key);
                                 onChange(newValue);
                             }}
+                            readOnly={readOnly}
+                            disabled={disabled}
                         />
                         <label htmlFor={this.id+key}>{group[key]}</label>
                     </div>
@@ -141,7 +149,7 @@ class RadioGroupField extends React.Component {
     }
 
     render() {
-        const {label, options, onChange, value, validationState, validationError} = this.props;
+        const {label, options, onChange, value, validationState, validationError, readOnly, disabled} = this.props;
         const {group, vertical} = options || {};
 
         const validationClass = validationState ? `validation-${validationState}` : '';
@@ -165,6 +173,8 @@ class RadioGroupField extends React.Component {
                             onChange={(e)=>{
                                 onChange(key);
                             }}
+                            readOnly={readOnly}
+                            disabled={disabled}
                         />
                         <label htmlFor={this.id+key}>{group[key]}</label>
                     </div>
@@ -189,7 +199,7 @@ class SelectGroupField extends React.Component {
     }
 
     render() {
-        const {label, options, onChange, value, validationState, validationError} = this.props;
+        const {label, options, onChange, value, validationState, validationError, readOnly, disabled} = this.props;
         const {group, multiple} = options || {};
 
         const validationClass = validationState ? `validation-${validationState}` : '';
@@ -216,6 +226,8 @@ class SelectGroupField extends React.Component {
                 value={value || (multiple ? [] : '')}
                 onChange={onFieldChange}
                 multiple={multiple}
+                readOnly={readOnly}
+                disabled={disabled}
             >
                 {
                     Object.keys(group).map(key=>
